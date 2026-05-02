@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import { Menu, X, Moon, Sun } from "lucide-react";
+import { Moon, Sun } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 const sections = [
@@ -8,7 +8,6 @@ const sections = [
 ];
 
 export const Navbar = () => {
-  const [open, setOpen] = useState(false);
   const [active, setActive] = useState("home");
   const [scrolled, setScrolled] = useState(false);
   const [dark, setDark] = useState(false);
@@ -34,7 +33,19 @@ export const Navbar = () => {
 
   const go = (id: string) => {
     document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
-    setOpen(false);
+  };
+
+  const container = {
+    hidden: { opacity: 0 },
+    show: {
+      opacity: 1,
+      transition: { staggerChildren: 0.06, delayChildren: 0.1 },
+    },
+  };
+
+  const item = {
+    hidden: { opacity: 0, y: -16 },
+    show: { opacity: 1, y: 0, transition: { type: "spring" as const, stiffness: 300, damping: 20 } },
   };
 
   return (
@@ -44,77 +55,63 @@ export const Navbar = () => {
       transition={{ duration: 0.5 }}
       className={cn(
         "fixed top-0 inset-x-0 z-50 transition-smooth",
-        scrolled ? "bg-background/80 backdrop-blur-lg border-b shadow-soft" : "bg-transparent"
+        scrolled ? "bg-background/80 backdrop-blur-lg border-b shadow-soft" : "bg-background/40 backdrop-blur-md"
       )}
     >
-      <nav className="container flex items-center justify-between h-16">
-        <button onClick={() => go("home")} className="font-display font-extrabold text-lg">
-          <span className="text-gradient">Aarav.</span>
-        </button>
-
-        <ul className="hidden lg:flex items-center gap-1">
-          {sections.map((s) => (
-            <li key={s}>
-              <button
-                onClick={() => go(s)}
-                className={cn(
-                  "relative px-3 py-2 text-sm font-medium capitalize transition-smooth hover:text-primary",
-                  active === s ? "text-primary" : "text-muted-foreground"
-                )}
-              >
-                {s}
-                {active === s && (
-                  <motion.span
-                    layoutId="nav-underline"
-                    className="absolute left-2 right-2 -bottom-0.5 h-0.5 rounded-full bg-gradient-primary"
-                  />
-                )}
-              </button>
-            </li>
-          ))}
-        </ul>
-
-        <div className="flex items-center gap-2">
+      <nav className="container flex flex-col md:flex-row md:items-center md:justify-between gap-3 py-3">
+        <div className="flex items-center justify-between">
+          <button onClick={() => go("home")} className="font-display font-extrabold text-lg">
+            <span className="text-gradient">Aarav.</span>
+          </button>
           <button
             onClick={() => setDark((d) => !d)}
-            className="p-2 rounded-full hover:bg-secondary transition-smooth"
+            className="md:hidden p-2 rounded-full hover:bg-secondary transition-smooth"
             aria-label="Toggle theme"
           >
             {dark ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
           </button>
-          <button
-            className="lg:hidden p-2 rounded-full hover:bg-secondary"
-            onClick={() => setOpen((o) => !o)}
-            aria-label="Toggle menu"
-          >
-            {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
-          </button>
         </div>
-      </nav>
 
-      {open && (
-        <motion.div
-          initial={{ opacity: 0, y: -10 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="lg:hidden border-t bg-background/95 backdrop-blur"
+        <motion.ul
+          variants={container}
+          initial="hidden"
+          animate="show"
+          className="flex flex-wrap items-center justify-center gap-1 md:gap-2"
         >
-          <ul className="container py-4 grid gap-1">
-            {sections.map((s) => (
-              <li key={s}>
-                <button
-                  onClick={() => go(s)}
-                  className={cn(
-                    "w-full text-left px-3 py-2 rounded-lg capitalize text-sm font-medium",
-                    active === s ? "bg-accent text-accent-foreground" : "hover:bg-secondary"
-                  )}
-                >
-                  {s}
-                </button>
-              </li>
-            ))}
-          </ul>
-        </motion.div>
-      )}
+          {sections.map((s) => (
+            <motion.li key={s} variants={item}>
+              <motion.button
+                whileHover={{ scale: 1.08, y: -2 }}
+                whileTap={{ scale: 0.95 }}
+                onClick={() => go(s)}
+                className={cn(
+                  "relative px-3 py-1.5 text-xs md:text-sm font-medium capitalize rounded-full transition-smooth",
+                  active === s
+                    ? "text-primary-foreground"
+                    : "text-muted-foreground hover:text-primary"
+                )}
+              >
+                {active === s && (
+                  <motion.span
+                    layoutId="nav-pill"
+                    className="absolute inset-0 rounded-full bg-gradient-primary shadow-glow"
+                    transition={{ type: "spring", stiffness: 400, damping: 30 }}
+                  />
+                )}
+                <span className="relative z-10">{s}</span>
+              </motion.button>
+            </motion.li>
+          ))}
+        </motion.ul>
+
+        <button
+          onClick={() => setDark((d) => !d)}
+          className="hidden md:inline-flex p-2 rounded-full hover:bg-secondary transition-smooth"
+          aria-label="Toggle theme"
+        >
+          {dark ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
+        </button>
+      </nav>
     </motion.header>
   );
 };
