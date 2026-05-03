@@ -128,13 +128,13 @@ const Admin = () => {
     setDraft(d => ({ ...d, profile: { ...d.profile, ...patch } }));
 
   const updateList = <T extends { id: string }>(key: keyof PortfolioData, id: string, patch: Partial<T>) =>
-    setDraft(d => ({ ...d, [key]: (d[key] as T[]).map(it => it.id === id ? { ...it, ...patch } : it) } as PortfolioData));
+    setDraft(d => ({ ...d, [key]: (d[key] as unknown as T[]).map(it => it.id === id ? { ...it, ...patch } : it) } as PortfolioData));
 
   const removeFrom = (key: keyof PortfolioData, id: string) =>
-    setDraft(d => ({ ...d, [key]: (d[key] as Array<{ id: string }>).filter(it => it.id !== id) } as PortfolioData));
+    setDraft(d => ({ ...d, [key]: (d[key] as unknown as Array<{ id: string }>).filter(it => it.id !== id) } as PortfolioData));
 
   const addTo = (key: keyof PortfolioData, item: { id: string }) =>
-    setDraft(d => ({ ...d, [key]: [...(d[key] as Array<{ id: string }>), item] } as PortfolioData));
+    setDraft(d => ({ ...d, [key]: [...(d[key] as unknown as Array<{ id: string }>), item] } as PortfolioData));
 
   // custom-section helpers
   const updateCustomSection = (id: string, patch: Partial<CustomSection>) =>
