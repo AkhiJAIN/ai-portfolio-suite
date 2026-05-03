@@ -9,23 +9,29 @@ import { Volunteering } from "@/components/portfolio/Volunteering";
 import { Achievements } from "@/components/portfolio/Achievements";
 import { Contact } from "@/components/portfolio/Contact";
 import { Footer } from "@/components/portfolio/Footer";
+import { CustomSection } from "@/components/portfolio/CustomSection";
+import { usePortfolio } from "@/store/portfolioStore";
 
-const Index = () => (
-  <div className="min-h-screen bg-background">
-    <Navbar />
-    <main>
-      <Hero />
-      <About />
-      <Education />
-      <Skills />
-      <Projects />
-      <Experience />
-      <Volunteering />
-      <Achievements />
-      <Contact />
-    </main>
-    <Footer />
-  </div>
-);
+const Index = () => {
+  const { data } = usePortfolio();
+  return (
+    <div className="min-h-screen bg-background">
+      <Navbar />
+      <main>
+        <Hero />
+        <About />
+        <Education />
+        <Skills />
+        <Projects />
+        <Experience />
+        <Volunteering />
+        <Achievements />
+        {data.customSections.map((s) => <CustomSection key={s.id} section={s} />)}
+        <Contact />
+      </main>
+      <Footer />
+    </div>
+  );
+};
 
 export default Index;
