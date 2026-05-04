@@ -261,20 +261,6 @@ const Admin = () => {
           ))}
         </SectionCard>
 
-        {/* EXPERIENCE */}
-        <SectionCard title="Experience" addLabel="Add experience"
-          onAdd={() => addTo("experience", { id: newId(), role: "", company: "", period: "", desc: "" } as ExperienceItem)}>
-          {draft.experience.map(e => (
-            <ItemRow key={e.id} onDelete={() => removeFrom("experience", e.id)}>
-              <div className="grid sm:grid-cols-3 gap-3">
-                <Field label="Role"><Input value={e.role} onChange={ev => updateList<ExperienceItem>("experience", e.id, { role: ev.target.value })} /></Field>
-                <Field label="Company"><Input value={e.company} onChange={ev => updateList<ExperienceItem>("experience", e.id, { company: ev.target.value })} /></Field>
-                <Field label="Period"><Input value={e.period} onChange={ev => updateList<ExperienceItem>("experience", e.id, { period: ev.target.value })} /></Field>
-              </div>
-              <Field label="Description"><Textarea rows={2} value={e.desc} onChange={ev => updateList<ExperienceItem>("experience", e.id, { desc: ev.target.value })} /></Field>
-            </ItemRow>
-          ))}
-        </SectionCard>
 
         {/* VOLUNTEERING */}
         <SectionCard title="Volunteering" addLabel="Add volunteering"
@@ -292,10 +278,11 @@ const Admin = () => {
 
         {/* ACHIEVEMENTS */}
         <SectionCard title="Achievements" addLabel="Add achievement"
-          onAdd={() => addTo("achievements", { id: newId(), title: "", desc: "" } as AchievementItem)}>
+          onAdd={() => addTo("achievements", { id: newId(), title: "", desc: "", image: "" } as AchievementItem)}>
           {draft.achievements.map(a => (
             <ItemRow key={a.id} onDelete={() => removeFrom("achievements", a.id)}>
               <Field label="Title"><Input value={a.title} onChange={ev => updateList<AchievementItem>("achievements", a.id, { title: ev.target.value })} /></Field>
+              <Field label="Image URL (optional)"><Input value={a.image || ""} onChange={ev => updateList<AchievementItem>("achievements", a.id, { image: ev.target.value })} placeholder="https://..." /></Field>
               <Field label="Description"><Textarea rows={2} value={a.desc} onChange={ev => updateList<AchievementItem>("achievements", a.id, { desc: ev.target.value })} /></Field>
             </ItemRow>
           ))}
