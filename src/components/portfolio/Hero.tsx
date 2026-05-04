@@ -2,6 +2,8 @@ import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Download, Mail } from "lucide-react";
 import { usePortfolio } from "@/store/portfolioStore";
+import { Hero3D } from "./Hero3D";
+import { Tilt3D } from "./Tilt3D";
 
 export const Hero = () => {
   const { data } = usePortfolio();
@@ -19,12 +21,16 @@ export const Hero = () => {
           className="relative order-2 lg:order-1 flex justify-center lg:justify-start"
         >
           <div className="relative">
-            <div className="absolute -inset-4 rounded-full bg-gradient-primary opacity-30 blur-2xl animate-pulse" />
-            <div className="relative h-64 w-64 sm:h-80 sm:w-80 lg:h-[420px] lg:w-[420px] rounded-full p-2 bg-gradient-primary shadow-glow">
-              <div className="h-full w-full rounded-full overflow-hidden bg-background">
-                <img src={profile.image} alt={profile.name} width={420} height={420} className="h-full w-full object-cover" />
-              </div>
+            <div className="absolute -inset-16 -z-10 opacity-80">
+              <Hero3D />
             </div>
+            <Tilt3D max={14} scale={1.04}>
+              <div className="relative h-64 w-64 sm:h-80 sm:w-80 lg:h-[420px] lg:w-[420px] rounded-full p-2 bg-gradient-primary shadow-glow">
+                <div className="h-full w-full rounded-full overflow-hidden bg-background">
+                  <img src={profile.image} alt={profile.name} width={420} height={420} className="h-full w-full object-cover" />
+                </div>
+              </div>
+            </Tilt3D>
             <motion.div
               animate={{ y: [0, -10, 0] }}
               transition={{ duration: 4, repeat: Infinity }}
