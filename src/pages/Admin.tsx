@@ -13,7 +13,7 @@ import {
 } from "@/store/portfolioStore";
 
 // Hardcoded password — change this!
-const ADMIN_PASSWORD = "admin123";
+const ADMIN_PASSWORD = "Akhilesh@9353";
 const AUTH_KEY = "portfolio-admin-auth";
 
 const Field = ({ label, children }: { label: string; children: React.ReactNode }) => (
@@ -116,7 +116,7 @@ const Admin = () => {
             <ArrowLeft className="h-3 w-3" /> back to site
           </Link>
           <p className="mt-5 text-[10px] text-muted-foreground text-center">
-            Default: <code className="bg-secondary px-1 rounded">admin123</code> · change in <code className="bg-secondary px-1 rounded">src/pages/Admin.tsx</code>
+            Change password in <code className="bg-secondary px-1 rounded">src/pages/Admin.tsx</code>
           </p>
         </motion.form>
       </div>
