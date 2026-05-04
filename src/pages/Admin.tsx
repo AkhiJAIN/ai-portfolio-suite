@@ -201,7 +201,7 @@ const Admin = () => {
 
         {/* EDUCATION */}
         <SectionCard title="Education" addLabel="Add education"
-          onAdd={() => addTo("education", { id: newId(), title: "", place: "", period: "", score: "", desc: "" } as EducationItem)}>
+          onAdd={() => addTo("education", { id: newId(), title: "", place: "", period: "", score: "", desc: "", image: "" } as EducationItem)}>
           {draft.education.map(e => (
             <ItemRow key={e.id} onDelete={() => removeFrom("education", e.id)}>
               <div className="grid sm:grid-cols-2 gap-3">
@@ -210,6 +210,7 @@ const Admin = () => {
                 <Field label="Period"><Input value={e.period} onChange={ev => updateList<EducationItem>("education", e.id, { period: ev.target.value })} /></Field>
                 <Field label="Score"><Input value={e.score} onChange={ev => updateList<EducationItem>("education", e.id, { score: ev.target.value })} /></Field>
               </div>
+              <Field label="Image URL (optional)"><Input value={e.image || ""} onChange={ev => updateList<EducationItem>("education", e.id, { image: ev.target.value })} placeholder="https://..." /></Field>
               <Field label="Description"><Textarea rows={2} value={e.desc} onChange={ev => updateList<EducationItem>("education", e.id, { desc: ev.target.value })} /></Field>
             </ItemRow>
           ))}
@@ -230,13 +231,14 @@ const Admin = () => {
 
         {/* PROJECTS */}
         <SectionCard title="Projects" addLabel="Add project"
-          onAdd={() => addTo("projects", { id: newId(), title: "", desc: "", stack: "", link: "" } as Project)}>
+          onAdd={() => addTo("projects", { id: newId(), title: "", desc: "", stack: "", link: "", image: "" } as Project)}>
           {draft.projects.map(p => (
             <ItemRow key={p.id} onDelete={() => removeFrom("projects", p.id)}>
               <div className="grid sm:grid-cols-2 gap-3">
                 <Field label="Title"><Input value={p.title} onChange={ev => updateList<Project>("projects", p.id, { title: ev.target.value })} /></Field>
                 <Field label="Link"><Input value={p.link} onChange={ev => updateList<Project>("projects", p.id, { link: ev.target.value })} /></Field>
               </div>
+              <Field label="Image URL (optional)"><Input value={p.image || ""} onChange={ev => updateList<Project>("projects", p.id, { image: ev.target.value })} placeholder="https://..." /></Field>
               <Field label="Description"><Textarea rows={2} value={p.desc} onChange={ev => updateList<Project>("projects", p.id, { desc: ev.target.value })} /></Field>
               <Field label="Tech stack (comma separated)"><Input value={p.stack} onChange={ev => updateList<Project>("projects", p.id, { stack: ev.target.value })} placeholder="React, Python, FastAPI" /></Field>
             </ItemRow>
@@ -245,7 +247,7 @@ const Admin = () => {
 
         {/* EXPERIENCE */}
         <SectionCard title="Experience" addLabel="Add experience"
-          onAdd={() => addTo("experience", { id: newId(), role: "", company: "", period: "", desc: "" } as ExperienceItem)}>
+          onAdd={() => addTo("experience", { id: newId(), role: "", company: "", period: "", desc: "", image: "" } as ExperienceItem)}>
           {draft.experience.map(e => (
             <ItemRow key={e.id} onDelete={() => removeFrom("experience", e.id)}>
               <div className="grid sm:grid-cols-3 gap-3">
@@ -253,10 +255,12 @@ const Admin = () => {
                 <Field label="Company"><Input value={e.company} onChange={ev => updateList<ExperienceItem>("experience", e.id, { company: ev.target.value })} /></Field>
                 <Field label="Period"><Input value={e.period} onChange={ev => updateList<ExperienceItem>("experience", e.id, { period: ev.target.value })} /></Field>
               </div>
+              <Field label="Image / logo URL (optional)"><Input value={e.image || ""} onChange={ev => updateList<ExperienceItem>("experience", e.id, { image: ev.target.value })} placeholder="https://..." /></Field>
               <Field label="Description"><Textarea rows={2} value={e.desc} onChange={ev => updateList<ExperienceItem>("experience", e.id, { desc: ev.target.value })} /></Field>
             </ItemRow>
           ))}
         </SectionCard>
+
 
         {/* VOLUNTEERING */}
         <SectionCard title="Volunteering" addLabel="Add volunteering"
@@ -274,10 +278,11 @@ const Admin = () => {
 
         {/* ACHIEVEMENTS */}
         <SectionCard title="Achievements" addLabel="Add achievement"
-          onAdd={() => addTo("achievements", { id: newId(), title: "", desc: "" } as AchievementItem)}>
+          onAdd={() => addTo("achievements", { id: newId(), title: "", desc: "", image: "" } as AchievementItem)}>
           {draft.achievements.map(a => (
             <ItemRow key={a.id} onDelete={() => removeFrom("achievements", a.id)}>
               <Field label="Title"><Input value={a.title} onChange={ev => updateList<AchievementItem>("achievements", a.id, { title: ev.target.value })} /></Field>
+              <Field label="Image URL (optional)"><Input value={a.image || ""} onChange={ev => updateList<AchievementItem>("achievements", a.id, { image: ev.target.value })} placeholder="https://..." /></Field>
               <Field label="Description"><Textarea rows={2} value={a.desc} onChange={ev => updateList<AchievementItem>("achievements", a.id, { desc: ev.target.value })} /></Field>
             </ItemRow>
           ))}

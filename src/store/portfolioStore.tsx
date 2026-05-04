@@ -13,14 +13,14 @@ export interface Profile {
   resume: string;
 }
 
-export interface EducationItem { id: string; title: string; place: string; period: string; score: string; desc: string; }
+export interface EducationItem { id: string; title: string; place: string; period: string; score: string; desc: string; image?: string; }
 export interface Skill { id: string; name: string; }
-export interface Project { id: string; title: string; desc: string; stack: string; link: string; }
-export interface ExperienceItem { id: string; role: string; company: string; period: string; desc: string; }
-export interface VolunteerItem { id: string; role: string; org: string; desc: string; }
-export interface AchievementItem { id: string; title: string; desc: string; }
+export interface Project { id: string; title: string; desc: string; stack: string; link: string; image?: string; }
+export interface ExperienceItem { id: string; role: string; company: string; period: string; desc: string; image?: string; }
+export interface VolunteerItem { id: string; role: string; org: string; desc: string; image?: string; }
+export interface AchievementItem { id: string; title: string; desc: string; image?: string; }
 
-export interface CustomItem { id: string; title: string; desc: string; }
+export interface CustomItem { id: string; title: string; desc: string; image?: string; }
 export interface CustomSection {
   id: string;
   slug: string; // url-safe id, used for nav anchor
