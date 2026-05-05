@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
-import { ReactNode } from "react";
+import { ReactNode, useId } from "react";
 import { cn } from "@/lib/utils";
+import { SectionBG3D } from "./SectionBG3D";
 
 interface Props {
   id: string;
@@ -10,9 +11,12 @@ interface Props {
   className?: string;
 }
 
-export const Section = ({ id, title, eyebrow, children, className }: Props) => (
-  <section id={id} className={cn("py-20 md:py-28 scroll-mt-20", className)}>
-    <div className="container">
+export const Section = ({ id, title, eyebrow, children, className }: Props) => {
+  const variant = (id.charCodeAt(0) + (id.charCodeAt(1) || 0)) % 3;
+  return (
+  <section id={id} className={cn("relative py-20 md:py-28 scroll-mt-20 overflow-hidden", className)}>
+    <SectionBG3D variant={variant} />
+    <div className="container relative">
       {(title || eyebrow) && (
         <motion.div
           initial={{ opacity: 0, y: 20 }}
