@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { Section } from "./Section";
 import { usePortfolio } from "@/store/portfolioStore";
+import { SkillCrystal } from "./SkillCrystal";
 
 export const Skills = () => {
   const { data } = usePortfolio();
@@ -15,8 +16,9 @@ export const Skills = () => {
             viewport={{ once: true }}
             transition={{ delay: i * 0.04, duration: 0.4 }}
             whileHover={{ scale: 1.08, y: -3 }}
-            className="rounded-xl border bg-card px-5 py-2.5 text-sm font-medium shadow-soft hover:shadow-glow hover:border-primary transition-smooth cursor-default"
+            className="inline-flex items-center gap-2 rounded-xl border bg-card pl-2 pr-5 py-2 text-sm font-medium shadow-soft hover:shadow-glow hover:border-primary transition-smooth cursor-default"
           >
+            <SkillCrystal index={i} />
             {s.name}
           </motion.span>
         ))}
