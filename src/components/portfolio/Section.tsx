@@ -41,4 +41,5 @@ export const Section = ({ id, title, eyebrow, children, className }: Props) => {
       {children}
     </div>
   </section>
-);
+  );
+};

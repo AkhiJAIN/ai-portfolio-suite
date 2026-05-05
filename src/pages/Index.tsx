@@ -10,12 +10,14 @@ import { Achievements } from "@/components/portfolio/Achievements";
 import { Contact } from "@/components/portfolio/Contact";
 import { Footer } from "@/components/portfolio/Footer";
 import { CustomSection } from "@/components/portfolio/CustomSection";
+import { ParticlesBG } from "@/components/portfolio/ParticlesBG";
 import { usePortfolio } from "@/store/portfolioStore";
 
 const Index = () => {
   const { data } = usePortfolio();
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-background relative">
+      <ParticlesBG />
       <Navbar />
       <main>
         <Hero />
