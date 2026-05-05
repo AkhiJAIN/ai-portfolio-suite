@@ -37,6 +37,7 @@ export const Achievements = () => {
                 </div>
               </div>
             </Tilt3D>
+            ); })()}
           </motion.div>
         ))}
       </div>
