@@ -2,7 +2,7 @@ import { motion } from "framer-motion";
 import { Trophy } from "lucide-react";
 import { Section } from "./Section";
 import { Tilt3D } from "./Tilt3D";
-import { usePortfolio } from "@/store/portfolioStore";
+import { usePortfolio, resolveImageUrl } from "@/store/portfolioStore";
 
 export const Achievements = () => {
   const { data } = usePortfolio();
@@ -17,11 +17,12 @@ export const Achievements = () => {
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: i * 0.08 }}
           >
+            {(() => { const img = resolveImageUrl(a.image); return (
             <Tilt3D max={10} scale={1.04} className="h-full">
               <div className="rounded-2xl border bg-card shadow-soft hover:shadow-glow transition-smooth text-center overflow-hidden h-full">
-                {a.image ? (
+                {img ? (
                   <div className="aspect-[4/3] overflow-hidden bg-secondary">
-                    <img src={a.image} alt={a.title} className="h-full w-full object-cover transition-transform duration-700 hover:scale-110" />
+                    <img src={img} alt={a.title} className="h-full w-full object-cover transition-transform duration-700 hover:scale-110" />
                   </div>
                 ) : (
                   <div className="pt-6">
