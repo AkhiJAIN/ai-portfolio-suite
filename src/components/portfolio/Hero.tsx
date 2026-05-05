@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Download, Mail } from "lucide-react";
-import { usePortfolio } from "@/store/portfolioStore";
+import { usePortfolio, resolveImageUrl } from "@/store/portfolioStore";
 import { Hero3D } from "./Hero3D";
 import { Tilt3D } from "./Tilt3D";
 
@@ -27,7 +27,7 @@ export const Hero = () => {
             <Tilt3D max={14} scale={1.04}>
               <div className="relative h-64 w-64 sm:h-80 sm:w-80 lg:h-[420px] lg:w-[420px] rounded-full p-2 bg-gradient-primary shadow-glow">
                 <div className="h-full w-full rounded-full overflow-hidden bg-background">
-                  <img src={profile.image} alt={profile.name} width={420} height={420} className="h-full w-full object-cover" />
+                  <img src={resolveImageUrl(profile.image) || profile.image} alt={profile.name} width={420} height={420} className="h-full w-full object-cover" />
                 </div>
               </div>
             </Tilt3D>

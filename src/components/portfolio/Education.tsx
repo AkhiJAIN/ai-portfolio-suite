@@ -2,7 +2,7 @@ import { motion } from "framer-motion";
 import { GraduationCap } from "lucide-react";
 import { Section } from "./Section";
 import { Tilt3D } from "./Tilt3D";
-import { usePortfolio } from "@/store/portfolioStore";
+import { usePortfolio, resolveImageUrl } from "@/store/portfolioStore";
 
 export const Education = () => {
   const { data } = usePortfolio();
@@ -23,11 +23,11 @@ export const Education = () => {
               <div className={`pl-12 md:pl-0 ${i % 2 === 0 ? "md:pr-10" : "md:pl-10"}`}>
                 <Tilt3D max={6}>
                   <div className="rounded-2xl border bg-card shadow-soft hover:shadow-elegant transition-smooth overflow-hidden">
-                    {e.image && (
+                    {(() => { const img = resolveImageUrl(e.image); return img ? (
                       <div className="aspect-[16/9] overflow-hidden bg-secondary">
-                        <img src={e.image} alt={e.place} className="h-full w-full object-cover transition-transform duration-700 hover:scale-110" />
+                        <img src={img} alt={e.place} className="h-full w-full object-cover transition-transform duration-700 hover:scale-110" />
                       </div>
-                    )}
+                    ) : null; })()}
                     <div className="p-6">
                       <p className="text-xs font-semibold uppercase tracking-wider text-primary">{e.period}</p>
                       <h3 className="mt-1 font-display text-xl font-bold">{e.title}</h3>

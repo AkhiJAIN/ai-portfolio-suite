@@ -21,6 +21,27 @@ export interface VolunteerItem { id: string; role: string; org: string; desc: st
 export interface AchievementItem { id: string; title: string; desc: string; image?: string; }
 
 export interface CustomItem { id: string; title: string; desc: string; image?: string; }
+
+// Normalize Google Drive share links into direct-viewable image URLs.
+// Accepts:
+//   https://drive.google.com/file/d/FILEID/view?usp=sharing
+//   https://drive.google.com/open?id=FILEID
+//   https://drive.google.com/uc?id=FILEID
+// Returns a thumbnail URL that renders inline in <img>.
+export const resolveImageUrl = (url?: string): string | undefined => {
+  if (!url) return url;
+  const s = url.trim();
+  if (!s) return undefined;
+  let id: string | null = null;
+  const m1 = s.match(/\/file\/d\/([a-zA-Z0-9_-]+)/);
+  if (m1) id = m1[1];
+  if (!id) {
+    const m2 = s.match(/[?&]id=([a-zA-Z0-9_-]+)/);
+    if (m2) id = m2[1];
+  }
+  if (id) return `https://drive.google.com/thumbnail?id=${id}&sz=w1200`;
+  return s;
+};
 export interface CustomSection {
   id: string;
   slug: string; // url-safe id, used for nav anchor

@@ -144,7 +144,7 @@ const Admin = () => {
   const addCustomSection = () =>
     setDraft(d => ({ ...d, customSections: [...d.customSections, { id: newId(), slug: `section-${d.customSections.length + 1}`, title: "New Section", eyebrow: "Custom", items: [] }] }));
   const addCustomItem = (sectionId: string) =>
-    updateCustomSection(sectionId, { items: [...(draft.customSections.find(s => s.id === sectionId)?.items || []), { id: newId(), title: "New item", desc: "" }] });
+    updateCustomSection(sectionId, { items: [...(draft.customSections.find(s => s.id === sectionId)?.items || []), { id: newId(), title: "New item", desc: "", image: "" }] });
   const updateCustomItem = (sectionId: string, itemId: string, patch: Partial<CustomItem>) => {
     const sec = draft.customSections.find(s => s.id === sectionId);
     if (!sec) return;
@@ -264,13 +264,14 @@ const Admin = () => {
 
         {/* VOLUNTEERING */}
         <SectionCard title="Volunteering" addLabel="Add volunteering"
-          onAdd={() => addTo("volunteering", { id: newId(), role: "", org: "", desc: "" } as VolunteerItem)}>
+          onAdd={() => addTo("volunteering", { id: newId(), role: "", org: "", desc: "", image: "" } as VolunteerItem)}>
           {draft.volunteering.map(v => (
             <ItemRow key={v.id} onDelete={() => removeFrom("volunteering", v.id)}>
               <div className="grid sm:grid-cols-2 gap-3">
                 <Field label="Role"><Input value={v.role} onChange={ev => updateList<VolunteerItem>("volunteering", v.id, { role: ev.target.value })} /></Field>
                 <Field label="Organization"><Input value={v.org} onChange={ev => updateList<VolunteerItem>("volunteering", v.id, { org: ev.target.value })} /></Field>
               </div>
+              <Field label="Image URL (optional, Drive link OK)"><Input value={v.image || ""} onChange={ev => updateList<VolunteerItem>("volunteering", v.id, { image: ev.target.value })} placeholder="https://drive.google.com/file/d/..." /></Field>
               <Field label="Description"><Textarea rows={2} value={v.desc} onChange={ev => updateList<VolunteerItem>("volunteering", v.id, { desc: ev.target.value })} /></Field>
             </ItemRow>
           ))}
@@ -307,6 +308,7 @@ const Admin = () => {
                 {sec.items.map(it => (
                   <ItemRow key={it.id} onDelete={() => removeCustomItem(sec.id, it.id)}>
                     <Field label="Item title"><Input value={it.title} onChange={e => updateCustomItem(sec.id, it.id, { title: e.target.value })} /></Field>
+                    <Field label="Image URL (optional, Drive link OK)"><Input value={it.image || ""} onChange={e => updateCustomItem(sec.id, it.id, { image: e.target.value })} placeholder="https://drive.google.com/file/d/..." /></Field>
                     <Field label="Description"><Textarea rows={2} value={it.desc} onChange={e => updateCustomItem(sec.id, it.id, { desc: e.target.value })} /></Field>
                   </ItemRow>
                 ))}

@@ -2,7 +2,7 @@ import { motion } from "framer-motion";
 import { ExternalLink, Github } from "lucide-react";
 import { Section } from "./Section";
 import { Tilt3D } from "./Tilt3D";
-import { usePortfolio } from "@/store/portfolioStore";
+import { usePortfolio, resolveImageUrl } from "@/store/portfolioStore";
 
 export const Projects = () => {
   const { data } = usePortfolio();
@@ -11,6 +11,7 @@ export const Projects = () => {
       <div className="grid md:grid-cols-2 gap-6 max-w-6xl mx-auto" style={{ perspective: 1200 }}>
         {data.projects.map((p, i) => {
           const stackArr = p.stack.split(",").map(s => s.trim()).filter(Boolean);
+          const img = resolveImageUrl(p.image);
           return (
             <motion.div
               key={p.id}
@@ -22,8 +23,8 @@ export const Projects = () => {
               <Tilt3D max={8} scale={1.02} className="h-full">
                 <article className="group relative rounded-2xl border bg-card p-6 shadow-soft hover:shadow-glow transition-smooth overflow-hidden h-full">
                   <div className="aspect-[16/9] rounded-xl mb-5 overflow-hidden bg-gradient-primary/10 grid place-items-center">
-                    {p.image ? (
-                      <img src={p.image} alt={p.title} className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110" />
+                    {img ? (
+                      <img src={img} alt={p.title} className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110" />
                     ) : (
                       <span className="font-display text-5xl font-extrabold text-gradient opacity-60">
                         {p.title.split(" ").map((w) => w[0]).join("").slice(0, 3)}
