@@ -18,27 +18,27 @@ export const SectionBG3D = ({ variant = 0 }: { variant?: number }) => {
     <div className="absolute inset-0 -z-10 pointer-events-none opacity-60" aria-hidden>
       <Canvas camera={{ position: [0, 0, 6], fov: 50 }} dpr={[1, 1.5]}>
         <ambientLight intensity={0.5} />
-        <directionalLight position={[3, 3, 3]} intensity={0.8} color="#fbbf24" />
+        <directionalLight position={[3, 3, 3]} intensity={0.8} color="#3b82f6" />
         <Suspense fallback={null}>
-          <Environment preset="sunset" />
+          <Environment preset="night" />
           <Float speed={1.2} rotationIntensity={0.5} floatIntensity={1.1}>
             <Spin speed={0.25}>
               <Icosahedron args={[0.6, 0]} position={positions[variant % 3]}>
                 {/* @ts-ignore */}
-                <MeshTransmissionMaterial thickness={0.8} roughness={0.05} transmission={1} ior={1.4} color="#10b981" />
+                <MeshTransmissionMaterial thickness={0.8} roughness={0.05} transmission={1} ior={1.4} color="#22d3ee" />
               </Icosahedron>
             </Spin>
           </Float>
           <Float speed={1.6} rotationIntensity={0.8} floatIntensity={1.3}>
             <Octahedron args={[0.45, 0]} position={positions[(variant + 1) % 3]}>
               {/* @ts-ignore */}
-              <MeshTransmissionMaterial thickness={0.7} roughness={0.05} transmission={1} ior={1.5} color="#fbbf24" />
+              <MeshTransmissionMaterial thickness={0.7} roughness={0.05} transmission={1} ior={1.5} color="#3b82f6" />
             </Octahedron>
           </Float>
           <Float speed={1.4} rotationIntensity={0.6} floatIntensity={1.2}>
             <Tetrahedron args={[0.4, 0]} position={positions[(variant + 2) % 3]}>
               {/* @ts-ignore */}
-              <MeshTransmissionMaterial thickness={0.7} roughness={0.05} transmission={1} ior={1.4} color="#34d399" />
+              <MeshTransmissionMaterial thickness={0.7} roughness={0.05} transmission={1} ior={1.4} color="#67e8f9" />
             </Tetrahedron>
           </Float>
         </Suspense>

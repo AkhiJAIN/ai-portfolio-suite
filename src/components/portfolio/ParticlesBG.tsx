@@ -18,7 +18,7 @@ const Field = ({ count = 1500 }: { count?: number }) => {
   return (
     // @ts-ignore
     <Points ref={ref} positions={positions} stride={3} frustumCulled={false}>
-      <PointMaterial transparent color="#fbbf24" size={0.025} sizeAttenuation depthWrite={false} opacity={0.85} />
+      <PointMaterial transparent color="#3b82f6" size={0.025} sizeAttenuation depthWrite={false} opacity={0.85} />
     </Points>
   );
 };

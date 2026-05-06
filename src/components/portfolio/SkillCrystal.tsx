@@ -14,16 +14,16 @@ const Gem = ({ color }: { color: string }) => {
   );
 };
 
-const PALETTE = ["#10b981", "#fbbf24", "#34d399", "#f59e0b", "#059669"];
+const PALETTE = ["#22d3ee", "#3b82f6", "#67e8f9", "#1e40af", "#0891b2"];
 
 /** Small 3D crystal icon for each skill. */
 export const SkillCrystal = ({ index = 0 }: { index?: number }) => (
   <div className="h-10 w-10 shrink-0">
     <Canvas camera={{ position: [0, 0, 2.4], fov: 45 }} dpr={[1, 1.5]}>
       <ambientLight intensity={0.7} />
-      <directionalLight position={[2, 2, 2]} intensity={1} color="#fbbf24" />
+      <directionalLight position={[2, 2, 2]} intensity={1} color="#3b82f6" />
       <Suspense fallback={null}>
-        <Environment preset="sunset" />
+        <Environment preset="night" />
         <Gem color={PALETTE[index % PALETTE.length]} />
       </Suspense>
     </Canvas>
