@@ -28,8 +28,8 @@ export interface CustomItem { id: string; title: string; desc: string; image?: s
 //   https://drive.google.com/open?id=FILEID
 //   https://drive.google.com/uc?id=FILEID
 // Returns a thumbnail URL that renders inline in <img>.
-export const resolveImageUrl = (url?: string): string | undefined => {
-  if (!url) return url;
+export const resolveImageUrl = (url?: string | null): string | undefined => {
+  if (!url || typeof url !== "string") return undefined;
   const s = url.trim();
   if (!s) return undefined;
   let id: string | null = null;
