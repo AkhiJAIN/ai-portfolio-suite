@@ -11,6 +11,7 @@ import { Contact } from "@/components/portfolio/Contact";
 import { Footer } from "@/components/portfolio/Footer";
 import { CustomSection } from "@/components/portfolio/CustomSection";
 import { ParticlesBG } from "@/components/portfolio/ParticlesBG";
+import { ScrollProgress } from "@/components/portfolio/ScrollProgress";
 import { usePortfolio } from "@/store/portfolioStore";
 
 const Index = () => {
@@ -18,6 +19,7 @@ const Index = () => {
   return (
     <div className="min-h-screen bg-background relative">
       <ParticlesBG />
+      <ScrollProgress />
       <Navbar />
       <main>
         <Hero />
